@@ -791,13 +791,13 @@ export default function SpectralPersistence() {
                     <span style={{ color: "#3A8C3A", fontWeight: 600 }}>1-4kHz ★</span>
                     <span style={{ color: "#3A8C3A" }}>8kHz</span>
                     <span style={{ color: "#B87A2E" }}>16kHz</span>
-                    <span style={{ color: "#B84040" }}>{(sampleRate/2000).toFixed(0)}kHz</span>
+                    <span style={{ color: "#B84040" }}>{(sampleRate / 2000).toFixed(0)}kHz</span>
                   </div>
                   <div style={{ display: "flex", gap: "12px", marginTop: "8px", fontSize: "10px" }}>
-                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#B8404040", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }}/>Cut</span>
-                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#B87A2E30", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }}/>Reduced</span>
-                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#3A8C3A25", border: "1px solid #3A8C3A40", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }}/>Safe</span>
-                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#3A8C3A40", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }}/>Sweet spot</span>
+                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#B8404040", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }} />Cut</span>
+                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#B87A2E30", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }} />Reduced</span>
+                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#3A8C3A25", border: "1px solid #3A8C3A40", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }} />Safe</span>
+                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#3A8C3A40", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }} />Sweet spot</span>
                   </div>
                 </div>
 
@@ -807,7 +807,7 @@ export default function SpectralPersistence() {
                     <div style={{ fontSize: "20px", fontWeight: 600, fontFamily: "JetBrains Mono", color: "#3A8C3A" }}>
                       {economics.safeZonePct.toFixed(0)}%
                     </div>
-                    <div style={{ fontSize: "10px", color: "#888" }}>of frequency bins at {(sampleRate/1000).toFixed(1)}kHz</div>
+                    <div style={{ fontSize: "10px", color: "#888" }}>of frequency bins at {(sampleRate / 1000).toFixed(1)}kHz</div>
                   </div>
                   <div style={{ background: "#111", borderRadius: "6px", padding: "12px", border: "1px solid #2A2A2A" }}>
                     <div style={{ fontSize: "10px", color: "#666", fontFamily: "JetBrains Mono", marginBottom: "4px" }}>WAV → MP3 COMPRESSION</div>
@@ -841,7 +841,7 @@ export default function SpectralPersistence() {
             </h3>
             <div style={{ fontSize: "13px", color: "#AAA", lineHeight: 1.8 }}>
               <p style={{ marginBottom: "12px" }}>
-                {showMp3 
+                {showMp3
                   ? `MP3 at 128kbps closes the gap dramatically — the overhead ratio drops from ~${Math.round(economics.overheadRatio)}× (WAV) to ~${economics.mp3_128_ratio.toFixed(1)}× (MP3) vs JPEG. Still larger, but now in the range where the tradeoffs become interesting:`
                   : `The spectral encoding is 50-200× larger than JPEG at every resolution. Raw efficiency never crosses. But efficiency isn't the only axis:`
                 }

@@ -753,80 +753,6 @@ export default function SpectralPersistence() {
             </table>
           </div>
 
-          {/* MP3 Safe Zone */}
-          {showMp3 && (
-            <div style={{ background: "#1A1008", borderRadius: "8px", padding: "24px", border: "1px solid #3A2A10", marginBottom: "20px" }}>
-              <h3 style={{ fontSize: "12px", fontFamily: "JetBrains Mono", color: "#E09A4A", letterSpacing: "1px", marginBottom: "12px" }}>
-                THE MP3 SAFE ZONE
-              </h3>
-              <div style={{ fontSize: "13px", color: "#AAA", lineHeight: 1.8 }}>
-                <p style={{ marginBottom: "12px" }}>
-                  MP3 compression isn't random — it follows a psychoacoustic model that's essentially a map of human hearing sensitivity.
-                  The losses are band-biased and predictable:
-                </p>
-
-                {/* Frequency spectrum visualization */}
-                <div style={{ background: "#111", borderRadius: "6px", padding: "16px", marginBottom: "16px", border: "1px solid #2A2A2A" }}>
-                  <div style={{ fontSize: "10px", color: "#666", fontFamily: "JetBrains Mono", marginBottom: "10px" }}>
-                    FREQUENCY SPECTRUM — MP3 PRESERVATION MAP
-                  </div>
-                  <div style={{ position: "relative", height: "40px", borderRadius: "4px", overflow: "hidden", marginBottom: "6px" }}>
-                    {/* Danger zone: sub-bass */}
-                    <div style={{ position: "absolute", left: "0%", width: "3%", height: "100%", background: "#B8404040" }} />
-                    {/* Reduced: bass */}
-                    <div style={{ position: "absolute", left: "3%", width: "5%", height: "100%", background: "#B87A2E30" }} />
-                    {/* Safe zone */}
-                    <div style={{ position: "absolute", left: "8%", width: "52%", height: "100%", background: "#3A8C3A25", border: "1px solid #3A8C3A40", borderRadius: "2px" }} />
-                    {/* Sweet spot */}
-                    <div style={{ position: "absolute", left: "18%", width: "22%", height: "100%", background: "#3A8C3A40" }} />
-                    {/* Reduced: high */}
-                    <div style={{ position: "absolute", left: "60%", width: "20%", height: "100%", background: "#B87A2E20" }} />
-                    {/* Danger zone: ultrasonic */}
-                    <div style={{ position: "absolute", left: "80%", width: "20%", height: "100%", background: "#B8404030" }} />
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "9px", fontFamily: "JetBrains Mono" }}>
-                    <span style={{ color: "#B84040" }}>20Hz</span>
-                    <span style={{ color: "#B87A2E" }}>200Hz</span>
-                    <span style={{ color: "#3A8C3A" }}>500Hz</span>
-                    <span style={{ color: "#3A8C3A", fontWeight: 600 }}>1-4kHz ★</span>
-                    <span style={{ color: "#3A8C3A" }}>8kHz</span>
-                    <span style={{ color: "#B87A2E" }}>16kHz</span>
-                    <span style={{ color: "#B84040" }}>{(sampleRate/2000).toFixed(0)}kHz</span>
-                  </div>
-                  <div style={{ display: "flex", gap: "12px", marginTop: "8px", fontSize: "10px" }}>
-                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#B8404040", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }}/>Cut</span>
-                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#B87A2E30", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }}/>Reduced</span>
-                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#3A8C3A25", border: "1px solid #3A8C3A40", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }}/>Safe</span>
-                    <span><span style={{ display: "inline-block", width: "8px", height: "8px", background: "#3A8C3A40", borderRadius: "2px", marginRight: "4px", verticalAlign: "middle" }}/>Sweet spot</span>
-                  </div>
-                </div>
-
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "16px" }}>
-                  <div style={{ background: "#111", borderRadius: "6px", padding: "12px", border: "1px solid #2A2A2A" }}>
-                    <div style={{ fontSize: "10px", color: "#666", fontFamily: "JetBrains Mono", marginBottom: "4px" }}>SAFE ZONE COVERAGE</div>
-                    <div style={{ fontSize: "20px", fontWeight: 600, fontFamily: "JetBrains Mono", color: "#3A8C3A" }}>
-                      {economics.safeZonePct.toFixed(0)}%
-                    </div>
-                    <div style={{ fontSize: "10px", color: "#888" }}>of frequency bins at {(sampleRate/1000).toFixed(1)}kHz</div>
-                  </div>
-                  <div style={{ background: "#111", borderRadius: "6px", padding: "12px", border: "1px solid #2A2A2A" }}>
-                    <div style={{ fontSize: "10px", color: "#666", fontFamily: "JetBrains Mono", marginBottom: "4px" }}>WAV → MP3 COMPRESSION</div>
-                    <div style={{ fontSize: "20px", fontWeight: 600, fontFamily: "JetBrains Mono", color: "#E09A4A" }}>
-                      {economics.wavToMp3_128_ratio.toFixed(1)}×
-                    </div>
-                    <div style={{ fontSize: "10px", color: "#888" }}>smaller at 128kbps</div>
-                  </div>
-                </div>
-
-                <div style={{ paddingLeft: "16px", borderLeft: "2px solid #E09A4A30" }}>
-                  <p style={{ marginBottom: "6px" }}><span style={{ color: "#E09A4A" }}>Strategy 1:</span> Place image data only in the 500Hz–8kHz safe zone. You use {economics.safeZonePct.toFixed(0)}% of the vertical resolution but gain MP3 survivability. The image compresses from WAV to MP3 128k and reconstructs from the spectrogram with minimal loss.</p>
-                  <p style={{ marginBottom: "6px" }}><span style={{ color: "#E09A4A" }}>Strategy 2:</span> Your noise idea — add perceptual masking tones at strategic frequencies to force the MP3 encoder to allocate more bits to your data bands. Essentially adversarial encoding against a known compression algorithm.</p>
-                  <p style={{ marginBottom: "0" }}><span style={{ color: "#E09A4A" }}>Strategy 3:</span> Use the cut zones as checksums. Place known patterns above 16kHz in the WAV. If they vanish, you know the file went through lossy compression — a built-in tamper detection layer.</p>
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* The thesis */}
           <div
             style={{
@@ -841,7 +767,7 @@ export default function SpectralPersistence() {
             </h3>
             <div style={{ fontSize: "13px", color: "#AAA", lineHeight: 1.8 }}>
               <p style={{ marginBottom: "12px" }}>
-                {showMp3 
+                {showMp3
                   ? `MP3 at 128kbps closes the gap dramatically — the overhead ratio drops from ~${Math.round(economics.overheadRatio)}× (WAV) to ~${economics.mp3_128_ratio.toFixed(1)}× (MP3) vs JPEG. Still larger, but now in the range where the tradeoffs become interesting:`
                   : `The spectral encoding is 50-200× larger than JPEG at every resolution. Raw efficiency never crosses. But efficiency isn't the only axis:`
                 }
