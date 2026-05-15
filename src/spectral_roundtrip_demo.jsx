@@ -339,8 +339,16 @@ export default function SpectralDemo() {
       try { audioCtxRef.current.close(); } catch(e) {}
     }
 
-    const actx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: SAMPLE_RATE });
+    // Do NOT force sampleRate on the context, as iOS Safari often rejects non-hardware rates.
+    // The AudioBuffer will still be created at SAMPLE_RATE and automatically resampled.
+    const actx = new (window.AudioContext || window.webkitAudioContext)();
     audioCtxRef.current = actx;
+
+    // iOS Safari often creates the context in a suspended state
+    // and requires an explicit resume() within the user gesture.
+    if (actx.state === 'suspended') {
+      actx.resume();
+    }
 
     // Create fresh AudioBuffer in this context
     const abuf = actx.createBuffer(1, rawBuf.length, SAMPLE_RATE);
@@ -373,7 +381,8 @@ export default function SpectralDemo() {
     let lastCol = -1;
     const freqData = new Float32Array(analyser.frequencyBinCount);
     const numFreqs = FREQ_BINS;
-    const binHz = SAMPLE_RATE / analyser.fftSize;
+    // Use the context's actual sampleRate because iOS might use hardware native (e.g., 48000Hz)
+    const binHz = actx.sampleRate / analyser.fftSize;
 
     const tick = () => {
       if (!audioCtxRef.current) return;
