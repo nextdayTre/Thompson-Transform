@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Exclude standalone MP3 analysis file from tracking
+src/spectral_persistence_mp3.jsx
