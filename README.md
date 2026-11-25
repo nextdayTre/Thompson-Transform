@@ -22,6 +22,10 @@ This repository contains two main React components:
    - Encode the image into an audio buffer by mapping columns to time and rows to frequency bins.
    - Play back the audio and watch the image reconstruct in real-time via a live spectrogram.
 
+## Research & Architecture Notes
+
+- **[Video-as-Audio Demo & Procedural Architecture](./docs/VIDEO_DEMO_AND_PROCEDURAL_ARCHITECTURE.md)** — Preserved functional & mathematical specification from the [`spectral-timeline` (`v0.1.0-video-cartridge-demo`)](https://github.com/nextdayTre/spectral-timeline/releases/tag/v0.1.0-video-cartridge-demo) milestone (Endomorphic `+ / −` Breathing polarity, 4-state Seam Deltas, BPM Polar-SDF Shape Morph, Neuromorphic Event-Cam `+ON / −OFF` stereo synthesis, Fragment Audio Server `grz0zrg/fas v2.0.2` wire protocol, and Dual-Layer `APIC` MP3 Synth-Cartridges), structured as a clean, bloat-free building resource for separate creative image-synthesis tools.
+
 ## Hosting & Live Demo
 
 This repository is designed to be hosted as a live portfolio piece via GitHub Pages.
