@@ -7,31 +7,35 @@ import './App.css';
 function App() {
   const [activeTab, setActiveTab] = useState('studio');
 
+  if (activeTab === 'studio') {
+    return <InfWaveStudio onSwitchView={setActiveTab} />;
+  }
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Top Navigation */}
+      {/* Compact Top Navigation for Classic / Economics views */}
       <div style={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: '16px',
-        background: '#0a0a0a',
-        borderBottom: '1px solid #1a1a1a',
-        gap: '12px',
+        padding: '12px 16px',
+        background: '#171a20',
+        borderBottom: '1px solid #2a303b',
+        gap: '10px',
         flexWrap: 'wrap'
       }}>
         <span style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: '12px',
           letterSpacing: '2px',
-          color: '#4AF28A',
+          color: '#38d47a',
           marginRight: '8px',
-          fontWeight: 600
+          fontWeight: 700
         }}>
           INFWAVE
         </span>
         {[
-          ['studio', 'InfWave Studio'],
+          ['studio', '← Timeline Studio'],
           ['demo', 'Classic Roundtrip'],
           ['theory', 'Theory & Economics'],
         ].map(([id, label]) => (
@@ -39,15 +43,15 @@ function App() {
             key={id}
             onClick={() => setActiveTab(id)}
             style={{
-              padding: '9px 20px',
-              background: activeTab === id ? '#2A2A2A' : 'transparent',
-              border: `1px solid ${activeTab === id ? '#4AF28A55' : '#2A2A2A'}`,
-              color: activeTab === id ? '#E8E4DD' : '#888',
-              borderRadius: '6px',
+              padding: '6px 14px',
+              background: activeTab === id ? '#1d2129' : 'transparent',
+              border: `1px solid ${activeTab === id ? '#38d47a88' : '#2a303b'}`,
+              color: activeTab === id ? '#38d47a' : '#8490a3',
+              borderRadius: '4px',
               cursor: 'pointer',
               fontFamily: "'JetBrains Mono', monospace",
-              fontSize: '12px',
-              transition: 'all 0.2s ease'
+              fontSize: '11px',
+              transition: 'all 0.15s ease'
             }}
           >
             {label}
@@ -57,13 +61,7 @@ function App() {
 
       {/* Main Content */}
       <div style={{ flex: 1 }}>
-        {activeTab === 'studio' ? (
-          <InfWaveStudio />
-        ) : activeTab === 'demo' ? (
-          <SpectralDemo />
-        ) : (
-          <SpectralPersistence />
-        )}
+        {activeTab === 'demo' ? <SpectralDemo /> : <SpectralPersistence />}
       </div>
     </div>
   );
