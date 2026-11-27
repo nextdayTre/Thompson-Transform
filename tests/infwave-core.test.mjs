@@ -38,6 +38,13 @@ import {
   renderBitWaveStackRGBA,
 } from "../src/core/procedural_sources.js";
 
+import {
+  CROSS_TOOL_CHANNEL,
+  parseCrossToolMessage,
+  buildChimeFeedMessage,
+  buildBitWaveCrystallizedMessage,
+} from "../src/core/cross_tool_bus.js";
+
 test("Safe-zone 500Hz-8kHz spans exactly 4.0 octaves across K=4, 8, 16 dyadic bands", () => {
   assert.equal(SAFE_ZONE_LO_HZ * 16, SAFE_ZONE_HI_HZ);
 
@@ -310,4 +317,50 @@ test("BitWave 0x8 Hex Codec, Twin Algebra, Carrier Synthesis & Schema-5 Project 
   );
   assert.equal(stackImg.rgba.length, 120 * 90 * 4);
   assert.equal(stackImg.bandCount, 8);
+});
+
+test("Cross-Tool BroadcastChannel message codec matches Chime and BitWave contracts", () => {
+  assert.equal(CROSS_TOOL_CHANNEL, "bitwave-feed");
+
+  // 1. Chime Bow->BW outbound message parsed cleanly
+  const fromChime = parseCrossToolMessage({
+    type: "bitwave-chime-out",
+    source: "ramanujan-chime",
+    hex: "FD80038FFC80038F",
+    width: 64,
+    meta: { preset: 12, lambda: 0.5, kappa: 0.35, contact: true },
+  });
+  assert.equal(fromChime.kind, "chime-out");
+  assert.equal(fromChime.width, 64);
+  assert.equal(fromChime.hex, "FD80038FFC80038F");
+  assert.equal(fromChime.meta.preset, 12);
+
+  // 2. BitWave Schema-5 project feed parsed into multi-lane hex stack
+  const fromBitWave = parseCrossToolMessage({
+    type: "bitwave-feed",
+    name: "BitWave Live",
+    payload: {
+      schema: 5,
+      app: "bitwave",
+      N: 64,
+      lanes: {
+        "1": { a: "8ADEFEDA85210125", b: "FFFFFFFF00000000" },
+        "2": { a: "0123456789ABCDEF", b: "FEDCBA9876543210" },
+      },
+    },
+  });
+  assert.equal(fromBitWave.kind, "bitwave-project");
+  assert.equal(fromBitWave.hexList.length, 2);
+  assert.equal(fromBitWave.hexList[1], "0123456789ABCDEF");
+
+  // 3. Self-echo from InfWave is ignored cleanly
+  const outToChime = buildChimeFeedMessage("8ADEFEDA85210125", { name: "InfWave Test" });
+  assert.equal(outToChime.type, "bitwave-feed");
+  assert.equal(parseCrossToolMessage(outToChime), null);
+
+  // 4. Outbound crystallized message conforms to Chime->BitWave schema
+  const outCryst = buildBitWaveCrystallizedMessage("0x8ADEFEDA85210125", { bands: 8 });
+  assert.equal(outCryst.type, "bitwave-chime-out");
+  assert.equal(outCryst.hex, "8ADEFEDA85210125");
+  assert.equal(outCryst.width, 64);
 });

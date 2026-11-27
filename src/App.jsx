@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import InfWaveStudio from './components/InfWaveStudio';
 import SpectralPersistence from './spectral_persistence';
 import SpectralDemo from './spectral_roundtrip_demo';
 import './App.css';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('demo');
+  const [activeTab, setActiveTab] = useState('studio');
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -16,56 +17,53 @@ function App() {
         padding: '16px',
         background: '#0a0a0a',
         borderBottom: '1px solid #1a1a1a',
-        gap: '16px',
+        gap: '12px',
         flexWrap: 'wrap'
       }}>
         <span style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: '12px',
           letterSpacing: '2px',
-          color: '#3A8C3A',
+          color: '#4AF28A',
           marginRight: '8px',
           fontWeight: 600
         }}>
           INFWAVE
         </span>
-        <button
-          onClick={() => setActiveTab('demo')}
-          style={{
-            padding: '10px 24px',
-            background: activeTab === 'demo' ? '#2A2A2A' : 'transparent',
-            border: '1px solid #2A2A2A',
-            color: activeTab === 'demo' ? '#E8E4DD' : '#888',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: '13px',
-            transition: 'all 0.2s ease'
-          }}
-        >
-          Live Demo
-        </button>
-        <button
-          onClick={() => setActiveTab('theory')}
-          style={{
-            padding: '10px 24px',
-            background: activeTab === 'theory' ? '#2A2A2A' : 'transparent',
-            border: '1px solid #2A2A2A',
-            color: activeTab === 'theory' ? '#E8E4DD' : '#888',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: '13px',
-            transition: 'all 0.2s ease'
-          }}
-        >
-          Theory & Economics
-        </button>
+        {[
+          ['studio', 'InfWave Studio'],
+          ['demo', 'Classic Roundtrip'],
+          ['theory', 'Theory & Economics'],
+        ].map(([id, label]) => (
+          <button
+            key={id}
+            onClick={() => setActiveTab(id)}
+            style={{
+              padding: '9px 20px',
+              background: activeTab === id ? '#2A2A2A' : 'transparent',
+              border: `1px solid ${activeTab === id ? '#4AF28A55' : '#2A2A2A'}`,
+              color: activeTab === id ? '#E8E4DD' : '#888',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: '12px',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       {/* Main Content */}
       <div style={{ flex: 1 }}>
-        {activeTab === 'demo' ? <SpectralDemo /> : <SpectralPersistence />}
+        {activeTab === 'studio' ? (
+          <InfWaveStudio />
+        ) : activeTab === 'demo' ? (
+          <SpectralDemo />
+        ) : (
+          <SpectralPersistence />
+        )}
       </div>
     </div>
   );
