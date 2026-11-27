@@ -11,15 +11,15 @@
 
 ## 1. Purpose & Repo-Split Strategy
 
-`Thompson-Transform` holds the original theoretical conjectures (*Spectral Persistence*, *Substrate Independence*, *Psychoacoustic Exploitation*, and *Multimodal Bridging*) alongside a minimal React/Vite roundtrip skeleton.
+`InfWave` *(formerly `Thompson-Transform`)* holds the original theoretical conjectures (*Spectral Persistence*, *Substrate Independence*, *Psychoacoustic Exploitation*, and *Multimodal Bridging*) alongside a minimal React/Vite roundtrip skeleton.
 
-This document captures the full functional, mathematical, and procedural progress achieved during the **Spectral Timeline Video-as-Audio & Synth-Cartridge** milestone (`e69cff5`) so it can serve as a **clean, bloat-free building resource** when constructing separate creative image-synthesis tools on top of the `Thompson-Transform` skeleton—without pulling in Media Bay / Timeline / DAW editor bloat.
+This document captures the full functional, mathematical, and procedural progress achieved during the **Spectral Timeline Video-as-Audio & Synth-Cartridge** milestone (`e69cff5`) so it can serve as a **clean, bloat-free building resource** when constructing separate creative image-synthesis tools on top of the `InfWave` skeleton—without pulling in Media Bay / Timeline / DAW editor bloat.
 
 ---
 
 ## 2. Core Conceptual Leap: From Static Image Roundtrip to Dynamic Video-as-Audio
 
-The original `Thompson-Transform` demo encodes a single static image into audio PCM and decodes it back via an STFT spectrogram. Three compounding ideas turned that static roundtrip into a real-time musical video-as-audio system:
+The original `InfWave` (`Thompson-Transform`) demo encodes a single static image into audio PCM and decodes it back via an STFT spectrogram. Three compounding ideas turned that static roundtrip into a real-time musical video-as-audio system:
 
 ### 2.1 Endomorphic Polarity Alternation ("Breathing" Cycle)
 Instead of rendering every frame as bright content on a dark background, consecutive time-synced windows alternate **figure/ground polarity**:
@@ -146,9 +146,9 @@ This realizes the **Psychoacoustic Exploitation + Multimodal Bridging** conjectu
 
 ---
 
-## 6. Clean Reuse Blueprint for `Thompson-Transform`
+## 6. Clean Reuse Blueprint for `InfWave`
 
-To build a separate, bloat-free creative image-synthesis tool on top of the `Thompson-Transform` React/Vite skeleton, import only the pure, UI-agnostic ES modules you need from [`nextdayTre/spectral-timeline` (`v0.1.0-video-cartridge-demo`)](https://github.com/nextdayTre/spectral-timeline/tree/v0.1.0-video-cartridge-demo):
+To build a separate, bloat-free creative image-synthesis tool on top of the `InfWave` React/Vite skeleton, import only the pure, UI-agnostic ES modules you need from [`nextdayTre/spectral-timeline` (`v0.1.0-video-cartridge-demo`)](https://github.com/nextdayTre/spectral-timeline/tree/v0.1.0-video-cartridge-demo):
 
 | Pure ES Module (Zero DOM / Zero React Deps) | What It Gives a New Creative Tool |
 | :--- | :--- |
@@ -157,4 +157,4 @@ To build a separate, bloat-free creative image-synthesis tool on top of the `Tho
 | `js/fas_client.js` | Exact `grz0zrg/fas v2.0.2` binary WebSocket client & 60/120 fps vertical slice streamer |
 | `js/mp3_cartridge.js` + `js/vendor/lame.min.js` | Pure-JS client-side MP3 encoding, ID3v2.3 `APIC` + `CHAP` writer/parser, PNG `tEXt` chunk codec, and JPEG-safe `8×8` macro-block strip encoder/decoder |
 
-Every module above is verified by `node test_node.mjs` (**9/9 checks passing** at tag `v0.1.0-video-cartridge-demo`) and can be dropped straight into `Thompson-Transform/src/` without bringing over any timeline or editor UI code.
+Every module above is verified by `node test_node.mjs` (**9/9 checks passing** at tag `v0.1.0-video-cartridge-demo`) and can be dropped straight into `InfWave/src/` without bringing over any timeline or editor UI code.

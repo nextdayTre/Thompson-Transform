@@ -12,11 +12,23 @@ function App() {
       <div style={{
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'center',
         padding: '16px',
         background: '#0a0a0a',
         borderBottom: '1px solid #1a1a1a',
-        gap: '16px'
+        gap: '16px',
+        flexWrap: 'wrap'
       }}>
+        <span style={{
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: '12px',
+          letterSpacing: '2px',
+          color: '#3A8C3A',
+          marginRight: '8px',
+          fontWeight: 600
+        }}>
+          INFWAVE
+        </span>
         <button
           onClick={() => setActiveTab('demo')}
           style={{

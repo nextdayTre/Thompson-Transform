@@ -1,6 +1,6 @@
-# Thompson Transform: Spectral Persistence & Roundtrip Demo
+# InfWave (Information Wave): Spectral Persistence & Endomorphic Audio
 
-Thompson Transform is an exploration into the intersection of signal theory and information economics. This project demonstrates the encoding of images into sound (via Fourier decomposition) and decoding them back into images (via spectrograms). 
+**InfWave** *(formerly Thompson Transform)* is the high-level **Information Wave** counterpart to **BitWave** *(Binary Wave)* and **The Ramanujan Chime** *(3D Hollow-Vessel Geometry)*. Rooted in the intersection of signal theory and information economics, InfWave explores encoding images, video frames, and structured parametric states into sound (via Fourier / additive spectral decomposition and modulated carriers) and decoding them back into visuals (via spectrograms and analytic carrier envelopes).
 
 It challenges the conventional idea of data compression by showing that while transforming an image into raw audio PCM (WAV) is vastly larger than standard compression algorithms like JPEG or WebP, the transformed signal gains unique properties:
 - **Substrate Independence:** The data can survive analog transmission, D/A/D conversion, and acoustic propagation.
@@ -24,6 +24,7 @@ This repository contains two main React components:
 
 ## Research & Architecture Notes
 
+- **[The Infinite Compassion — Cross-Tool System Reference & Handoff](./INFINITE-COMPASSION-HANDOFF.md)** — Three-tool endomorphic loop uniting **InfWave** (Information Wave), **The Ramanujan Chime**, and **BitWave** (Binary Wave).
 - **[Video-as-Audio Demo & Procedural Architecture](./docs/VIDEO_DEMO_AND_PROCEDURAL_ARCHITECTURE.md)** — Preserved functional & mathematical specification from the [`spectral-timeline` (`v0.1.0-video-cartridge-demo`)](https://github.com/nextdayTre/spectral-timeline/releases/tag/v0.1.0-video-cartridge-demo) milestone (Endomorphic `+ / −` Breathing polarity, 4-state Seam Deltas, BPM Polar-SDF Shape Morph, Neuromorphic Event-Cam `+ON / −OFF` stereo synthesis, Fragment Audio Server `grz0zrg/fas v2.0.2` wire protocol, and Dual-Layer `APIC` MP3 Synth-Cartridges), structured as a clean, bloat-free building resource for separate creative image-synthesis tools.
 
 ## Hosting & Live Demo
